@@ -61,6 +61,7 @@ $route['dashboard/product'] = 'ProductController/index';
 $route['dashboard/product/create'] = 'ProductController/create';
 $route['dashboard/product/edit/(:num)'] = 'ProductController/edit/$1';
 $route['dashboard/product/delete/(:num)'] = 'ProductController/destroy/$1';
+$route['dashboard/product/search'] = 'ProductController/search';
 
 $route['dashboard/product/category'] = 'CategoryController/index';
 $route['dashboard/product/category/create'] = 'CategoryController/create';

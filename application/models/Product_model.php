@@ -67,6 +67,19 @@ class Product_model extends CI_Model {
     $result = $this->db->delete('product', array('id' => $id));
     return $result;
   }
+
+  public function search($keyword) {
+    if(!$keyword){
+      return null;
+    }
+    $this->db->select('product.*, category.name as category_name');
+    $this->db->from('product');
+    $this->db->join('category', 'category.id = product.category_id');
+    $this->db->like('product.name', $keyword); 
+    $this->db->or_like('product.price', $keyword);
+    $query = $this->db->get();
+    return $query->result();
+  }
   // ------------------------------------------------------------------------
 
 }

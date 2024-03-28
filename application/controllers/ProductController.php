@@ -159,7 +159,16 @@ class ProductController extends CI_Controller
     $this->session->set_flashdata('success', 'Product has been deleted');
     redirect('dashboard/product');
   }
- 
+
+  public function search() {
+    $keyword = $this->input->get('keyword');
+
+		$search_result = $this->product_model->search($keyword);
+		
+		$this->load->view('search.php', [
+      'products' => $search_result
+    ]);
+  }
 }
 
 
