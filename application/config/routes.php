@@ -56,6 +56,12 @@ $route['translate_uri_dashes'] = FALSE;
 $route['auth/register'] = 'AuthController/register';
 $route['dashboard'] = 'DashboardController/index';
 $route['logout'] = 'DashboardController/logout';
+
+$route['dashboard/product'] = 'ProductController/index';
+$route['dashboard/product/create'] = 'ProductController/create';
+$route['dashboard/product/edit/(:num)'] = 'ProductController/edit/$1';
+$route['dashboard/product/delete/(:num)'] = 'ProductController/destroy/$1';
+
 $route['dashboard/product/category'] = 'CategoryController/index';
 $route['dashboard/product/category/create'] = 'CategoryController/create';
 $route['dashboard/product/category/edit/(:num)'] = 'CategoryController/edit/$1';

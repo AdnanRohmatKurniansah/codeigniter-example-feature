@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?v=2"></script>
 </head>
 <body>
 <div class="min-h-screen flex items-center justify-center w-full dark:bg-gray-950">

@@ -29,6 +29,12 @@ class Category_model extends CI_Model {
 
 
   // ------------------------------------------------------------------------
+  public function all() {
+    $this->db->order_by('id', 'desc');
+    $query = $this->db->get('category');
+    return $query->result();
+  }
+
   public function getData($limit = null, $start = null)
   {
       $this->db->order_by('id', 'desc');
@@ -38,10 +44,6 @@ class Category_model extends CI_Model {
   }
 
   public function create($data) {
-    if(!$data){
-			return null;
-		}
-
 		return $this->db->insert('category', $data);
   }
 
