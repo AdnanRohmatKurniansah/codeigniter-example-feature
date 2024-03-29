@@ -40,6 +40,11 @@ class Product_model extends CI_Model {
       return $query->result();
   }
 
+  public function all() {
+    $this->db->order_by('id', 'desc');
+    $query = $this->db->get('product');
+    return $query->result();
+  }
 
   public function create($data) {
 		return $this->db->insert('product', $data);

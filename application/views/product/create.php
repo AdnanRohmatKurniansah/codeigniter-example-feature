@@ -22,6 +22,11 @@
             <?= form_error('price', '<small class="text-red-600 mt-3">', '</small>'); ?>
           </div>
           <div class="mb-4">
+            <label for="stock" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Stock</label>
+            <input value="<?= set_value('stock'); ?>"  type="number" min="1" id="stock" name="stock" class="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="stock" required>
+            <?= form_error('stock', '<small class="text-red-600 mt-3">', '</small>'); ?>
+          </div>
+          <div class="mb-4">
             <label for="category_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Category</label>
             <select name="category_id" class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all ">
                 <?php foreach ($categories as $category) :?>

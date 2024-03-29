@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com?v=3"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.8.0/dist/full.min.css?v=3" rel="stylesheet" type="text/css" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11?v=3"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
     .dark .dark\:divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
         border-color: rgba(55, 65, 81);

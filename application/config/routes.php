@@ -67,3 +67,6 @@ $route['dashboard/product/category'] = 'CategoryController/index';
 $route['dashboard/product/category/create'] = 'CategoryController/create';
 $route['dashboard/product/category/edit/(:num)'] = 'CategoryController/edit/$1';
 $route['dashboard/product/category/delete/(:num)'] = 'CategoryController/destroy/$1';
+
+$route['dashboard/transaction'] = 'TransactionController/index';
+$route['dashboard/transaction/create'] = 'TransactionController/create';

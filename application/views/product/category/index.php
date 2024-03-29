@@ -32,8 +32,8 @@
                             <td><?= date('d M Y h:i', strtotime($category->updated_at)); ?></td>
                             <td class="flex">
                                 <a class="btn bg-green-500 text-white hover:bg-green-700" href="<?= base_url('dashboard/product/category/edit/' . $category->id) ?>">Edit</a>
-                                <form action="<?= base_url('dashboard/product/category/delete/' . $category->id) ?>" method="post">
-                                    <button onclick="return confirm('Hapus category ini')" type="submit" class="btn bg-red-500 text-white hover:bg-red-700">Hapus</button>
+                                <form id="deleteForm<?= $category->id ?>" action="<?= base_url('dashboard/product/category/delete/' . $category->id) ?>" method="post">
+                                    <button type="button" onclick="confirmDelete(<?= $category->id ?>)"  class="btn bg-red-500 text-white hover:bg-red-700">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -49,4 +49,25 @@
       </div>
     </div>
 </div>
+
+<script>
+    const confirmDelete = (categoryId) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this category!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.querySelector(`form#deleteForm${categoryId}`).submit();
+            }
+        });
+    }
+</script>
+
 @endsection

@@ -32,6 +32,7 @@ class ProductController extends CI_Controller
         ['field' => 'name', 'label' => 'Name', 'rules' => 'required|min_length[3]'],
         ['field' => 'category_id', 'label' => 'Category_id', 'rules' => 'required|numeric'],
         ['field' => 'price', 'label' => 'Price', 'rules' => 'required|numeric'],
+        ['field' => 'stock', 'label' => 'Stock', 'rules' => 'required|numeric'],
     ];
 
     foreach ($rules as $rule) {
@@ -44,7 +45,7 @@ class ProductController extends CI_Controller
     $config["base_url"] = base_url('dashboard/product');
     $config["total_rows"] = $this->product_model->countData();
     $config['page_query_string'] = TRUE;
-    $config["per_page"] = 1;
+    $config["per_page"] = 10;
     $config["uri_segment"] = 2;
     $config['full_tag_open'] = '<ul class="pagination">';        
     $config['full_tag_close'] = '</ul>';        
@@ -95,6 +96,7 @@ class ProductController extends CI_Controller
                   'name' => htmlspecialchars($this->input->post('name', true)),
                   'category_id' => htmlspecialchars($this->input->post('category_id', true)),
                   'price' => htmlspecialchars($this->input->post('price', true)),
+                  'stock' => htmlspecialchars($this->input->post('stock', true)),
                   'image' => $image_name  
               ];
 
@@ -124,7 +126,8 @@ class ProductController extends CI_Controller
         $data = [
             'name' => htmlspecialchars($this->input->post('name', true)),
             'category_id' => htmlspecialchars($this->input->post('category_id', true)),
-            'price' => htmlspecialchars($this->input->post('price', true))
+            'price' => htmlspecialchars($this->input->post('price', true)),
+            'stock' => htmlspecialchars($this->input->post('stock', true))
         ];
 
         if (!empty($_FILES['image']['name'])) {
