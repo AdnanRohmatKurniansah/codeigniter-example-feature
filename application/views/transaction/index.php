@@ -21,58 +21,28 @@
                         <th>Product</th>
                         <th>Total</th>
                         <th>Date</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
-                <!-- <tbody>
-                    <?php foreach ($products as $index => $product) : ?>
+                <tbody>
+                    <?php foreach ($transactions as $index => $transaction) : ?>
                         <tr>
                             <td><?= $index + 1; ?></td>
-                            <td>
-                                <img width="50px" src="<?= base_url('public/uploads/') . $product->image ?>" alt="">
-                            </td>
-                            <td><?= $product->name; ?></td>
-                            <td><?= $product->category_name; ?></td>
-                            <td><?= $product->price; ?></td>
-                            <td><?= $product->stock; ?></td>
-                            <td class="flex">
-                                <a class="btn bg-green-500 text-white hover:bg-green-700" href="<?= base_url('dashboard/product/edit/' . $product->id) ?>">Edit</a>
-                                <form id="deleteForm<?= $product->id ?>" action="<?= base_url('dashboard/product/delete/' . $product->id) ?>" method="post">
-                                    <button type="button" onclick="confirmDelete(<?= $product->id ?>)" class="btn bg-red-500 text-white hover:bg-red-700">Hapus</button>
-                                </form>
-                            </td>
+                            <td><?= $transaction->member_name; ?></td>
+                            <td><?= $transaction->product_names ?></td>
+                            <td><?= $transaction->total; ?></td>
+                            <td><?= $transaction->transaction_date; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                </tbody> -->
+                </tbody>
             </table>
-            <!-- <div class="flex justify-center my-4">
+            <div class="flex justify-center my-4">
                 <ul class="flex list-none rounded-md space-x-2">
                     <?php echo str_replace(['pagination', 'page-item', 'page-link'], ['pagination flex', 'page-item inline-block rounded-sm border border-gray-300', 'page-link block px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-200'], $links); ?>
                 </ul>
-            </div> -->
+            </div>
         </div>
       </div>
     </div>
 </div>
-
-<!-- <script>
-    const confirmDelete = (productId) => {
-        Swal.fire({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this product!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            cancelButtonText: "No, cancel!",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        }).then((result) => {
-            if (result.isConfirmed) {
-                document.querySelector(`form#deleteForm${productId}`).submit();
-            }
-        });
-    }
-</script> -->
 
 @endsection
