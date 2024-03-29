@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <script src="https://cdn.tailwindcss.com?v=3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.8.0/dist/full.min.css?v=3" rel="stylesheet" type="text/css" />
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11?v=3"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

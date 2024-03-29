@@ -58,6 +58,14 @@ class Transaction_model extends CI_Model {
     return $this->db->count_all('transaction');
   }
 
+  public function statistic() {
+    return $this->db->select('DATE_FORMAT(transaction_date, "%M") AS date, COUNT(*) AS count', false)
+        ->group_by('DATE_FORMAT(transaction_date, "%M")')
+        ->order_by('DATE_FORMAT(transaction_date, "%M")')
+        ->get('transaction')->result();
+  }
+
+
 
   // ------------------------------------------------------------------------
 

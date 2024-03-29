@@ -29,7 +29,11 @@ class DashboardController extends CI_Controller
 
   public function index()
   {
-    $this->load->view('dashboard');
+    $transactions = $this->transaction_model->statistic();
+
+    $this->load->view('dashboard', [
+      'transactions' => $transactions
+    ]);
   }
 
   public function logout() {
