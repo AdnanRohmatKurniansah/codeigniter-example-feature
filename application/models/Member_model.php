@@ -36,6 +36,40 @@ class Member_model extends CI_Model {
     return $query->result();
   }
 
+  public function getData($limit, $start) {
+    $this->db->order_by('id', 'desc');
+    $this->db->limit($limit, $start);
+    $query = $this->db->get('member');
+    return $query->result();
+  }
+
+  public function create($data) {
+    return $this->db->insert('member', $data);
+  }
+
+  public function find($id) {
+    return $this->db->get_where('member', ['id' => $id])->row();
+  }
+
+  public function update($id, $data) {
+    if(!$id){
+			return null;
+		}
+ 
+    $result = $this->db->where('id', $id)->update('member', $data);
+    return $result;
+  }
+
+  public function countData() {
+    return $this->db->count_all('member');
+  }
+
+  public function delete($id)
+  {
+    $result = $this->db->delete('member', array('id' => $id));
+    return $result;
+  }
+
   // ------------------------------------------------------------------------
 
 }

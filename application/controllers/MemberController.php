@@ -4,7 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  *
- * Controller CategoryController
+ * Controller MemberController
  *
  * This controller for ...
  *
@@ -18,7 +18,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class CategoryController extends CI_Controller
+class MemberController extends CI_Controller
 {
     
   public function __construct()
@@ -28,7 +28,9 @@ class CategoryController extends CI_Controller
 
   public function _rules() {
     $rules = [
-      ['field' => 'name', 'label' => 'Name', 'rules' => 'required|min_length[3]|is_unique[category.name]']
+      ['field' => 'name', 'label' => 'Name', 'rules' => 'required|min_length[3]'],
+      ['field' => 'address', 'label' => 'Address', 'rules' => 'required'],
+      ['field' => 'no_telp', 'label' => 'No_telp', 'rules' => 'required'],
     ];
 
     foreach ($rules as $rule) {
@@ -39,8 +41,8 @@ class CategoryController extends CI_Controller
 
   public function index()
   { 
-    $config["base_url"] = base_url('dashboard/product/category');
-    $config["total_rows"] = $this->category_model->countData();
+    $config["base_url"] = base_url('dashboard/member');
+    $config["total_rows"] = $this->member_model->countData();
     $config['page_query_string'] = TRUE;
     $config["per_page"] = 10;
     $config["uri_segment"] = 2;
@@ -66,10 +68,10 @@ class CategoryController extends CI_Controller
 
     $this->pagination->initialize($config);
     $data["links"] = $this->pagination->create_links();
-    $categories = $this->category_model->getData($config["per_page"], $offset);     
+    $members = $this->member_model->getData($config["per_page"], $offset);     
     
-    $this->load->view('product/category/index', [
-      'categories' => $categories,
+    $this->load->view('member/index', [
+      'members' => $members,
       'links' => $data['links']
     ]);
   }
@@ -78,44 +80,49 @@ class CategoryController extends CI_Controller
     $this->_rules();
 
     if ($this->form_validation->run() == FALSE) {
-      $this->load->view('product/category/create');
+      $this->load->view('member/create');
     } else {
       $data = [
-          'name' => htmlspecialchars($this->input->post('name', true))
+          'name' => htmlspecialchars($this->input->post('name', true)),
+          'address' => htmlspecialchars($this->input->post('address', true)),
+          'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
       ];
 
-      $this->category_model->create($data);
-      $this->session->set_flashdata('success', 'New category has been added');
-      redirect('dashboard/product/category');
+      $this->member_model->create($data);
+      $this->session->set_flashdata('success', 'New member has been added');
+      redirect('dashboard/member');
     }
   }
 
   public function edit($id) {
     $this->_rules();
 
-    $category = $this->category_model->find($id);
-    $this->load->view('product/category/edit', [
-      'category' => $category
+    $member = $this->member_model->find($id);
+    $this->load->view('member/edit', [
+      'member' => $member
     ]);
     if ($this->form_validation->run() == FALSE) {
     } else {
       $data = [
-          'name' => htmlspecialchars($this->input->post('name', true))
+        'name' => htmlspecialchars($this->input->post('name', true)),
+        'address' => htmlspecialchars($this->input->post('address', true)),
+        'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
       ];
 
-      $this->category_model->update($id, $data);
-      $this->session->set_flashdata('update', 'Category has been updated');
-      redirect('dashboard/product/category');
+      $this->member_model->update($id, $data);
+      $this->session->set_flashdata('update', 'Member has been updated');
+      redirect('dashboard/member');
     }
   }
 
   public function destroy($id) {
-    $this->category_model->delete($id);
-    $this->session->set_flashdata('success', "Category has been deleted");
-    redirect('dashboard/product/category');
+    $this->member_model->delete($id);
+    $this->session->set_flashdata('success', "Member has been deleted");
+    redirect('dashboard/member');
   }
+
 }
 
 
-/* End of file CategoryController.php */
-/* Location: ./application/controllers/CategoryController.php */
+/* End of file MemberController.php */
+/* Location: ./application/controllers/MemberController.php */

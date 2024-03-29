@@ -68,5 +68,11 @@ $route['dashboard/product/category/create'] = 'CategoryController/create';
 $route['dashboard/product/category/edit/(:num)'] = 'CategoryController/edit/$1';
 $route['dashboard/product/category/delete/(:num)'] = 'CategoryController/destroy/$1';
 
+$route['dashboard/member'] = 'MemberController/index';
+$route['dashboard/member/create'] = 'MemberController/create';
+$route['dashboard/member/edit/(:num)'] = 'MemberController/edit/$1';
+$route['dashboard/member/delete/(:num)'] = 'MemberController/destroy/$1';
+
+
 $route['dashboard/transaction'] = 'TransactionController/index';
 $route['dashboard/transaction/create'] = 'TransactionController/create';
