@@ -76,3 +76,4 @@ $route['dashboard/member/delete/(:num)'] = 'MemberController/destroy/$1';
 
 $route['dashboard/transaction'] = 'TransactionController/index';
 $route['dashboard/transaction/create'] = 'TransactionController/create';
+$route['dashboard/transaction/report'] = 'TransactionController/printPdf';

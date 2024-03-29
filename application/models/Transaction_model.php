@@ -41,8 +41,20 @@ class Transaction_model extends CI_Model {
     $query = $this->db->get();
 
     return $query->result();
-}
+  }
 
+  public function all() {
+    $this->db->select('transaction.*, member.name as member_name, GROUP_CONCAT(product.name) as product_names');
+    $this->db->from('transaction');
+    $this->db->join('member', 'member.id = transaction.member_id');
+    $this->db->join('detail_transaction', 'detail_transaction.transaction_id = transaction.id');
+    $this->db->join('product', 'product.id = detail_transaction.product_id');
+    $this->db->group_by('transaction.id');
+    $this->db->order_by('transaction.id', 'desc');
+    $query = $this->db->get();
+
+    return $query->result();
+  }
 
   public function insert($transaction_data, $details_data) {
     $this->db->insert('transaction', $transaction_data);
@@ -64,7 +76,6 @@ class Transaction_model extends CI_Model {
         ->order_by('DATE_FORMAT(transaction_date, "%M")')
         ->get('transaction')->result();
   }
-
 
 
   // ------------------------------------------------------------------------

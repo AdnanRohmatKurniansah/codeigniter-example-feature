@@ -1,4 +1,7 @@
 <?php
+
+use Dompdf\Dompdf;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -24,7 +27,7 @@ class TransactionController extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    // $this->load->model('transaction_model');
+    // $this->load->library('Pdf');
   }
 
   public function index()
@@ -87,6 +90,22 @@ class TransactionController extends CI_Controller
               'products' => $products
           ]);
       }
+  }
+
+  public function printPdf() {
+    $transactions = $this->transaction_model->all();
+    
+    $pdf = new Dompdf();
+    
+    $pdf->setPaper('A4', 'portrait');
+    
+    $html = $this->load->view('transactions_report', array('transactions' => $transactions), TRUE);
+    $pdf->loadHtml($html);
+    
+    $pdf->render();
+    
+    $pdf->stream('transaction-report.pdf', array('Attachment' => 0));
+    exit;
   }
 }
 

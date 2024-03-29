@@ -11,6 +11,9 @@
           <div class="relative w-full max-w-full flex-grow flex-1 text-right">
             <a href="<?= base_url('dashboard/transaction/create') ?>" class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Add transaction</a>
           </div>
+          <form class="mt-2" action="<?= base_url('dashboard/transaction/report') ?>" method="post">
+              <button class="bg-green-500 dark:bg-gray-100 text-white active:bg-green-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">Generate report</button>
+          </form>
         </div>
         <div class="block w-full overflow-x-auto mb-5">
             <table class="table table-zebra">
