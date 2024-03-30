@@ -72,6 +72,8 @@ $route['dashboard/member'] = 'MemberController/index';
 $route['dashboard/member/create'] = 'MemberController/create';
 $route['dashboard/member/edit/(:num)'] = 'MemberController/edit/$1';
 $route['dashboard/member/delete/(:num)'] = 'MemberController/destroy/$1';
+$route['dashboard/member/export'] = 'MemberController/export';
+$route['dashboard/member/import'] = 'MemberController/import';
 
 
 $route['dashboard/transaction'] = 'TransactionController/index';

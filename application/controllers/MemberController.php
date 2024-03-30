@@ -1,4 +1,8 @@
 <?php
+
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 
@@ -120,6 +124,72 @@ class MemberController extends CI_Controller
     $this->session->set_flashdata('success', "Member has been deleted");
     redirect('dashboard/member');
   }
+
+  public function export() {
+    $filename = 'member.xlsx';
+    $members = $this->member_model->all();
+    $spreadsheet = new Spreadsheet();    
+    $sheet = $spreadsheet->getActiveSheet();
+    $sheet->setCellValue('A1', 'No');
+    $sheet->setCellValue('B1', 'Name');
+    $sheet->setCellValue('C1', 'Address');
+    $sheet->setCellValue('D1', 'Telephone');
+    $rows = 2;
+    foreach ($members as $index => $member) {
+        $sheet->setCellValue('A' . $rows, $index + 1);
+        $sheet->setCellValue('B' . $rows, $member->name);
+        $sheet->setCellValue('C' . $rows, $member->address);
+        $sheet->setCellValue('D' . $rows, $member->no_telp);
+        $rows++;
+    }
+    $writer = new Xlsx($spreadsheet);
+
+    // Send the file directly to the browser
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="' . $filename . '"');
+    header('Cache-Control: max-age=0');
+
+    $writer->save('php://output');
+  }
+
+  public function import() {
+    if ($_FILES['excel']['name']) {
+        $file_name = $_FILES['excel']['name'];
+        $file_extension = pathinfo($file_name, PATHINFO_EXTENSION);
+
+        if (in_array(strtolower($file_extension), array('xlsx', 'xls'))) {
+          $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+          $spreadsheet = $reader->load($_FILES['excel']['tmp_name']);
+      
+          $worksheet = $spreadsheet->getActiveSheet();
+      
+          foreach ($worksheet->getRowIterator(2) as $row) {
+              $cellIterator = $row->getCellIterator();
+              $cellIterator->setIterateOnlyExistingCells(false); 
+              $data = [];
+      
+              foreach ($cellIterator as $cell) {
+                  $data[] = $cell->getValue();
+              }
+      
+              $this->member_model->create([
+                'name' => $data[1],     
+                'address' => $data[2],  
+                'no_telp' => $data[3],  
+            ]);
+          }
+
+            $this->session->set_flashdata('success', 'Import member data successfully');
+            redirect('dashboard/member');
+        } else {
+            $this->session->set_flashdata('error', 'Invalid file format. Please upload an Excel file.');
+            redirect('dashboard/member');
+        }
+    } else {
+        $this->session->set_flashdata('error', 'Please select a file to import');
+        redirect('dashboard/member');
+    }
+}
 
 }
 

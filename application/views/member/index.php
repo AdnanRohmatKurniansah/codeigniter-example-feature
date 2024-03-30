@@ -11,6 +11,23 @@
           <div class="relative w-full max-w-full flex-grow flex-1 text-right">
             <a href="<?= base_url('dashboard/member/create') ?>" class="bg-blue-500 dark:bg-gray-100 text-white active:bg-blue-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Add new member</a>
           </div>
+          <form class="mt-2" action="<?= base_url('dashboard/member/export') ?>" method="post">
+              <button class="bg-green-500 dark:bg-gray-100 text-white active:bg-green-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">Export data</button>
+          </form>
+          <button onclick="my_modal_3.showModal()" class="bg-red-500 mt-2 dark:bg-gray-100 text-white active:bg-red-600 dark:text-gray-800 dark:active:text-gray-700 text-xs font-bold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit">Import data</button>
+          <dialog id="my_modal_3" class="modal">
+            <div class="modal-box">
+                <h3 class="font-bold mb-5 text-lg">Input file csv in this form</h3>
+                <form method="post" enctype="multipart/form-data" action="<?= base_url('dashboard/member/import') ?>">
+                    <div class="mb-4">
+                        <label for="excel" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">File</label>
+                        <input type="file" id="excel" name="excel" required class="shadow-sm bg-white rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                        <?= form_error('excel', '<small class="text-red-600 mt-3">', '</small>'); ?>
+                    </div>
+                    <button type="submit" class=" flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Submit</button>
+                </form>
+            </div>
+          </dialog>
         </div>
         <div class="block w-full overflow-x-auto mb-5">
             <table class="table table-zebra">
